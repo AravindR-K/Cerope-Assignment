@@ -16,6 +16,10 @@ app.get('/', (req, res) => {
   res.send('Cerope backend is running...');
 });
 
-app.listen(5001, () => {
-    console.log("server started in PORT : 5001");
-})
+const PORT = process.env.PORT || 5000;
+
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(` Server running on http://localhost:${PORT}`);
+  });
+});
