@@ -19,16 +19,6 @@ const userSchema = new mongoose.Schema({
         required: true
     },
 
-        firstName: {
-        type: String,
-        default: ""
-    },
-
-    lastName: {
-        type: String,
-        default: ""
-    },
-
     profilePicture: {
         type: String,  // URL or Base64
         default: ""
@@ -41,8 +31,8 @@ const userSchema = new mongoose.Schema({
 
     stylePreference: {
         type: String,  
-        enum: ["men", "women", "both", ""],
-        default: ""
+        enum: ["men", "women", "both"],
+        default: "both"
     },
 
     phone: {

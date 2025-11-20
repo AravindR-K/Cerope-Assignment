@@ -4,21 +4,21 @@ const jwt = require("jsonwebtoken")
 
 registerUser = async (req, res) => {
     try {
-        const {name, email, password} = req.body;
-        if (!name || !email || !password ) {
+        const { name, email, password } = req.body;
+        if (!name || !email || !password) {
             return res.status(400).json({
-                "error": "All fields are required" 
+                "error": "All fields are required"
             })
         }
 
-        const IsUserExisisting = await User.findOne({email})
-        if (IsUserExisisting){
+        const IsUserExisisting = await User.findOne({ email })
+        if (IsUserExisisting) {
             return res.status(400).json({
-            "error": "Email already registered. Log in" 
+                "error": "Email already registered. Log in"
             })
         }
 
-        const hashedPass = await bcrypt.hash(password, 10) 
+        const hashedPass = await bcrypt.hash(password, 10)
 
         const user = await User.create({
             name,
@@ -30,31 +30,31 @@ registerUser = async (req, res) => {
 
         return res.status(201).json({
             "status": 200,
-            "message": "User registered successfully"
+            "message": "User registered successfully",
+            user
         })
-    } catch(error){
+    } catch (error) {
         console.log("Error in authController.js: ", error)
         return res.status(500).json({
-        "message": "Something Bad Happend.."
+            "message": "Something Bad Happend.."
         })
     }
 }
 
 loginUser = async (req, res) => {
     try {
-        const {email, password} = req.body;
-        if( !email || !password) {
+        const { email, password } = req.body;
+        if (!email || !password) {
             return res.status(400).json({
-            "message": "Fields missing. Recheck" 
+                "message": "Fields missing. Recheck"
             })
         }
 
-        const user = await User.findOne({email})
+        const user = await User.findOne({ email })
 
-
-        if (!user){
+        if (!user) {
             return res.status(400).json({
-            "message": "user not available. go and register" 
+                "message": "user not available. go and register"
             })
         }
 
@@ -62,19 +62,31 @@ loginUser = async (req, res) => {
 
         if (!isMatch) {
             return res.status(400).json({
-            "message": "Password incorrect" 
+                "message": "Password incorrect"
             })
         }
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" })
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: false,        // true only in https
+            sameSite: "lax",
+            maxAge: 1 * 60 * 60 * 1000  // 1 hour
+        });
+
+
         console.log(user)
         return res.status(201).json({
             "message": "User logged in successfully"
         })
-    } catch(error){
+
+
+    } catch (error) {
         console.log("Error in authController.js: ", error)
         return res.status(500).json({
-        "message": "Something Bad Happend.."
+            "message": "Something Bad Happend.."
         })
     }
 
 }
-module.exports = {registerUser, loginUser}
+module.exports = { registerUser, loginUser }
