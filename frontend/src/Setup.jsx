@@ -2,14 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-/*
-  Setup.jsx
-  - Stores profilePicture as Base64 in DB (simple approach)
-  - GET /api/profile/myProfile to prefill
-  - PUT /api/profile/myProfile with { updates: { ... } }
-  - Requires cookie JWT (withCredentials: true)
-*/
-
 const Setup = () => {
   const navigate = useNavigate();
 
@@ -146,18 +138,54 @@ const Setup = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-cover bg-center bg-no-repeat relative"
-         style={{ backgroundImage: "url('/bg_people.png')" }}>
-      
+      <div
+        className="min-h-screen flex flex-col relative"
+        style={{
+          background: "linear-gradient(180deg, #F7F3EE 0%, #FBF9F6 100%)"
+        }}
+      >
       <div className="absolute inset-0 bg-white/70 backdrop-blur-sm"></div>
 
       <div className="relative z-10">
 
-        {/* NAVBAR */}
-        <header className="flex justify-between items-center px-8 py-4 border-b bg-white/40">
-          <div className="text-2xl font-bold text-black">Cerope</div>
-          <button className="px-4 py-2 bg-black text-white rounded-full">Explore More ✨</button>
-        </header>
+{/* NAVBAR */}
+      <header className="flex justify-between items-center px-10 py-4 
+              bg-white/80 backdrop-blur-xl rounded-full shadow-lg 
+              mt-4 mx-6 border border-gray-200">
+
+        {/* LEFT LOGO SECTION */}
+        <div className="flex items-center gap-3">
+          {/* Minimal Icon */}
+          <img src="/logo.jpg" alt="Cerope" className="w-6 h-6" />
+          {/* Logo Text */}
+          <h2 className="text-xl font-semibold tracking-wide text-black">Cerope</h2>
+        </div>
+
+        {/* CENTER — (EMPTY SPACE TO BALANCE UI) */}
+        <div className="flex-1"></div>
+
+        {/* EXPLORE MORE BUTTON */}
+        <button
+          className="
+            px-5 py-2 rounded-full text-sm font-semibold 
+            bg-gradient-to-r from-pink-300 via-purple-300 to-green-300 
+            border border-black shadow-md
+            hover:scale-105 transition flex items-center gap-2
+            mr-4
+          "
+        >
+          Explore More ✨
+        </button>
+
+        {/* PROFILE ICON */}
+        <div className="w-10 h-10 rounded-full overflow-hidden border border-black shadow">
+          <img
+            src="/profile_image.png"
+            alt="profile"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </header>
 
         {/* MAIN */}
         <main className="py-12 px-10">

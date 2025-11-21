@@ -44,14 +44,45 @@ const SignIn = () => {
       {/* ACTUAL PAGE CONTENT */}
       <div className="relative z-10">
 
-        {/* NAVBAR */}
-        <header className="flex justify-between items-center px-10 py-4 border-b bg-white/40 backdrop-blur-md">
-          <h2 className="text-2xl font-bold tracking-wide">Cerope</h2>
+{/* NAVBAR */}
+<header className="flex justify-between items-center px-10 py-4 
+        bg-white/80 backdrop-blur-xl rounded-full shadow-lg 
+        mt-4 mx-6 border border-gray-200">
 
-          <button className="px-4 py-2 bg-black text-white rounded-full flex items-center gap-2 shadow-sm">
-            Explore More ✨
-          </button>
-        </header>
+  {/* LEFT LOGO SECTION */}
+  <div className="flex items-center gap-3">
+    {/* Minimal Icon */}
+    <img src="/logo.jpg" alt="Cerope" className="w-6 h-6" />
+    {/* Logo Text */}
+    <h2 className="text-xl font-semibold tracking-wide text-black">Cerope</h2>
+  </div>
+
+  {/* CENTER — (EMPTY SPACE TO BALANCE UI) */}
+  <div className="flex-1"></div>
+
+  {/* EXPLORE MORE BUTTON */}
+  <button
+    className="
+      px-5 py-2 rounded-full text-sm font-semibold 
+      bg-gradient-to-r from-pink-300 via-purple-300 to-green-300 
+      border border-black shadow-md
+      hover:scale-105 transition flex items-center gap-2
+      mr-4
+    "
+  >
+    Explore More ✨
+  </button>
+
+  {/* PROFILE ICON */}
+  <div className="w-10 h-10 rounded-full overflow-hidden border border-black shadow">
+    <img
+      src="/profile_image.png"
+      alt="profile"
+      className="w-full h-full object-cover"
+    />
+  </div>
+</header>
+
 
         {/* MAIN CONTENT */}
         <section className="flex justify-center items-start gap-28 py-20 px-10">

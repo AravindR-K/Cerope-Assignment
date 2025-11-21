@@ -1,4 +1,3 @@
-// src/Profile.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -110,11 +109,9 @@ const Profile = () => {
     >
         Home
     </Link>
-    <div 
-        className="flex items-center gap-1 cursor-pointer text-gray-900 hover:text-blue-600 transition-colors"
-    >
-        <span>Know My Vibe</span>
-        <span>▾</span>
+    <div className="flex items-center gap-1 cursor-pointer text-gray-900 hover:text-blue-600 transition-colors">
+      <span>Know My Vibe</span>
+      <span>▾</span>
     </div>
     <Link 
         to="/wardrobe" 
