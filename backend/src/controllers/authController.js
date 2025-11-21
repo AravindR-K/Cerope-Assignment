@@ -65,11 +65,11 @@ const loginUser = async (req, res) => {
     // 🔥 Correct cookie config
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "none",
-      path: "/",
-      maxAge: 60 * 60 * 1000
+      secure: false,      // ❗ important for localhost
+      sameSite: "lax",    // ❗ DO NOT USE None in localhost
+      maxAge: 3600000,
     });
+
 
     return res.status(201).json({
       message: "User logged in successfully"
@@ -81,4 +81,9 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser };
+logOutUser = (req, res) => {
+  res.clearCookie("token", { httpOnly: true, sameSite: "lax", secure: false });
+  return res.status(200).json({ message: "Logged out" });
+};
+
+module.exports = { registerUser, loginUser, logOutUser};
