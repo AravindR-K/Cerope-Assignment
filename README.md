@@ -53,38 +53,7 @@ Cerope is a stylish and secure user onboarding flow featuring:
 - MongoDB / Mongoose
 - JWT Authentication
 - Bcrypt Encryption
-
----
-
-## 📁 Project Structure
-
-Cerope-Assignment/
-│
-├── backend/
-│ ├── controllers/
-│ ├── routes/
-│ ├── models/
-│ ├── config/
-│ ├── server.js
-│ └── package.json
-│
-├── frontend/
-│ ├── src/
-│ │ ├── Register.jsx
-│ │ ├── SignIn.jsx
-│ │ ├── Setup.jsx
-│ │ ├── Profile.jsx
-│ │ ├── App.jsx
-│ ├── public/
-│ └── package.json
-│
-└── images/
-├── signin.png
-├── signup.png
-├── setup.png
-├── profile.png
-
-
+  
 ---
 
 ## ⚙️ Installation
