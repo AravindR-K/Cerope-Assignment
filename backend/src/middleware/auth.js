@@ -1,38 +1,38 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const User = require("../models/User.js");
 
 const cookieJwtAuth = async (req, res, next) => {
-    const token = req.cookies.token;
+  const token = req.cookies.token;
 
-    if (!token) {
-        return res.status(401).json({
-            status: "failed",
-            message: "No token found. Please login again."
-        });
+  if (!token) {
+    return res.status(401).json({
+      status: "failed",
+      message: "No token found. Please login again"
+    });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    const user = await User.findById(decoded.id).select("-password");
+    if (!user) {
+      return res.status(401).json({
+        status: "failed",
+        message: "User does not exist"
+      });
     }
 
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = user;
+    next();
 
-        const user = await User.findById(decoded.id).select("-password");
-        if (!user) {
-            res.clearCookie("token");
-            return res.status(401).json({
-                status: "failed",
-                message: "User does not exist"
-            });
-        }
-
-        req.user = user;
-        next();
-
-    } catch (error) {
-        res.clearCookie("token");
-        return res.status(401).json({
-            status: "failed",
-            message: "Token invalid. Login again."
-        });
-    }
+  } catch (error) {
+    console.error("JWT error:", error);
+    res.clearCookie("token");
+    return res.status(401).json({
+      status: "failed",
+      message: "Token invalid or expired"
+    });
+  }
 };
 
 module.exports = cookieJwtAuth;
