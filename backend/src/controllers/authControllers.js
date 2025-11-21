@@ -6,40 +6,47 @@ registerUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
         if (!name || !email || !password) {
-            return res.status(400).json({
-                "error": "All fields are required"
-            })
+            return res.status(400).json({ error: "All fields are required" });
         }
 
-        const IsUserExisisting = await User.findOne({ email })
-        if (IsUserExisisting) {
-            return res.status(400).json({
-                "error": "Email already registered. Log in"
-            })
+        const existing = await User.findOne({ email });
+        if (existing) {
+            return res.status(400).json({ error: "Email already registered. Log in" });
         }
 
-        const hashedPass = await bcrypt.hash(password, 10)
+        const hashedPass = await bcrypt.hash(password, 10);
 
         const user = await User.create({
             name,
             email,
             password: hashedPass
-        })
+        });
 
-        await user.save()
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+            expiresIn: "1h",
+        });
+
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: false,      
+            sameSite: "none",
+            path: "/",
+            maxAge: 60 * 60 * 1000
+        });
+
 
         return res.status(201).json({
-            "status": 200,
-            "message": "User registered successfully",
+            status: 200,
+            message: "User registered & logged in",
             user
-        })
+        });
+
     } catch (error) {
-        console.log("Error in authController.js: ", error)
-        return res.status(500).json({
-            "message": "Something Bad Happend.."
-        })
+        console.log("Error in authController.js: ", error);
+        return res.status(500).json({ message: "Something Bad Happened.." });
     }
 }
+
 
 loginUser = async (req, res) => {
     try {
@@ -69,9 +76,10 @@ loginUser = async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" })
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,        // true only in https
-            sameSite: "lax",
-            maxAge: 1 * 60 * 60 * 1000  // 1 hour
+            secure: false,        
+            sameSite: "none",
+            maxAge: 1 * 60 * 60 * 1000,  
+            path: "/"
         });
 
 
