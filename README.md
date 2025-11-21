@@ -5,7 +5,6 @@ Built with a polished UI, secure backend, and intuitive user flow.
 
 ---
 
-
 ## 📸 Screenshots
 
 ### 🔐 Sign In Page
