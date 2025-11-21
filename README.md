@@ -61,31 +61,28 @@ Cerope is a stylish and secure user onboarding flow featuring:
 Cerope-Assignment/
 │
 ├── backend/
-│   ├── src/
-│   │   ├── config/
-│   │   ├── controllers/
-│   │   ├── middleware/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   ├── server.js
-│   ├── .env
-│   └── package.json
+│ ├── controllers/
+│ ├── routes/
+│ ├── models/
+│ ├── config/
+│ ├── server.js
+│ └── package.json
 │
 ├── frontend/
-│   ├── src/
-│   │   ├── Register.jsx
-│   │   ├── SignIn.jsx
-│   │   ├── Setup.jsx
-│   │   ├── Profile.jsx
-│   │   ├── App.jsx
-│   ├── public/
-│   └── package.json
+│ ├── src/
+│ │ ├── Register.jsx
+│ │ ├── SignIn.jsx
+│ │ ├── Setup.jsx
+│ │ ├── Profile.jsx
+│ │ ├── App.jsx
+│ ├── public/
+│ └── package.json
 │
 └── images/
-    ├── signin.png
-    ├── signup.png
-    ├── setup.png
-    ├── profile.png
+├── signin.png
+├── signup.png
+├── setup.png
+├── profile.png
 
 
 ---
