@@ -5,7 +5,6 @@ Built with a polished UI, secure backend, and intuitive user flow.
 
 ---
 
-
 ## 📸 Screenshots
 
 ### 🔐 Sign In Page
@@ -86,20 +85,6 @@ npm run dev
 
 Frontend runs at:
 👉 http://localhost:5173
-
-
-🔗 API Endpoints
-
-Auth Routes
-Method	Endpoint	Description
-POST	/api/auth/register	Register new user
-POST	/api/auth/signin	Login user
-POST	/api/auth/logout	Logout user
-
-Profile Routes
-Method	Endpoint	Description
-GET	/api/profile/myProfile	Fetch logged-in user
-PUT	/api/profile/myProfile	Update user profile
 
 👨‍💻 Author
 
